@@ -8,6 +8,7 @@ public class SalesTracker {
 
     public static void main(String[] args) {
         
+        // Invoke the test method!
         SalesTracker.test();
         
     }
@@ -16,9 +17,15 @@ public class SalesTracker {
         
         String line = "-----------------------------------------";
         
-        PaperAccount testAccount = new PaperAccount( 50 );
+        Paper testPaperAccount = new Paper();
         System.out.println( line );
-        System.out.println( testAccount.toString() );
+        System.out.println( testPaperAccount );
+        
+        System.out.println( "" );
+               
+        Supplies testSuppliesAccount = new Supplies();
+        System.out.println( line );
+        System.out.println( testSuppliesAccount );
         
     }
     
