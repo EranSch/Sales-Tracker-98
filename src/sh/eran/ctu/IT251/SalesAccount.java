@@ -86,7 +86,7 @@ public abstract class SalesAccount {
     
     protected SalesAccount(){
        accountID = String.valueOf(NumOfAccounts++);
-       System.out.println("Account created( ID: " + accountID + " )");
+       System.out.println( this.getClass().getSimpleName() + " created! ( ID: " + accountID + " )");
     }
     
     protected SalesAccount( String newClientID ){

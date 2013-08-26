@@ -14,9 +14,11 @@ public class SalesTracker {
     
     public static void test(){
         
+        String line = "-----------------------------------------";
+        
         PaperAccount testAccount = new PaperAccount( 50 );
-        PaperAccount testAccount2 = new PaperAccount( 50 );
-        PaperAccount testAccount3 = new PaperAccount( 50 );
+        System.out.println( line );
+        System.out.println( testAccount.toString() );
         
     }
     
