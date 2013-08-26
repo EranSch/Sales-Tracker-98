@@ -4,7 +4,7 @@ package sh.eran.ctu.IT251;
  *
  * @author eran
  */
-public class SalesAccount {
+public abstract class SalesAccount {
     
     /*
      * ======================= STATIC CLASS VARIABLES ==========================
@@ -84,16 +84,14 @@ public class SalesAccount {
      * and more!
      */
     
-    SalesAccount(){
+    protected SalesAccount(){
        accountID = String.valueOf(NumOfAccounts++);
-       
-       System.out.println("Account created(ID: " + accountID + ")");
+       System.out.println("Account created( ID: " + accountID + " )");
     }
     
-    SalesAccount( String newClientID ){
+    protected SalesAccount( String newClientID ){
         clientID = newClientID;
         accountID = String.valueOf(NumOfAccounts++);
-        
         System.out.println("Account created(ID: " + accountID + ")");
     }
     

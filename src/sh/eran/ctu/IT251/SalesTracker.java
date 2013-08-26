@@ -14,8 +14,9 @@ public class SalesTracker {
     
     public static void test(){
         
-        SalesAccount testAccount = new SalesAccount( "test" );
-        System.out.println(testAccount.getAccount());
+        PaperAccount testAccount = new PaperAccount( 50 );
+        PaperAccount testAccount2 = new PaperAccount( 50 );
+        PaperAccount testAccount3 = new PaperAccount( 50 );
         
     }
     
