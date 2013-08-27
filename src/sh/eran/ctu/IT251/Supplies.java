@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Supplies extends Account {
     
-    private ArrayList<String> salesRecord = new ArrayList<String>();
+    private ArrayList<Transaction> salesRecord = new ArrayList<Transaction>();
     
     @Override
     public String toString() {
@@ -24,15 +24,24 @@ public class Supplies extends Account {
         response.append( " Object {\n" );
         
         // Append subclass specific properties
-        response.append("  ").append("salesRecord : ").append( salesRecord).append("\n");
-        //response.append("  ").append("paperPrice : ").append( paperPrice).append("\n");
+        response.append("  ").append("Date Created : ").append( this.getCreatedDate() ).append("\n");
+        response.append("  ").append("Sales Record : ").append( salesRecord).append("\n");
+        response.append("  ").append("Total Sales: ").append( this.getTotalSales() );
+
         
-        response.append("}\n");
+        response.append("\n}\n");
               
         // Return the output
         return response.toString();
         
     } // end method
     
+    public void addSale( Transaction sale ){
+        salesRecord.add( sale );
+    }
+    
+    public int getTotalSales(){
+        return salesRecord.size();
+    }
     
 }

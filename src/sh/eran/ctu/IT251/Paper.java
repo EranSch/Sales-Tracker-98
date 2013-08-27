@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Paper extends Account {
     
-    private ArrayList<String> paperRecord = new ArrayList<String>();
+    private ArrayList<Transaction> paperRecord = new ArrayList<Transaction>();
     private double paperPrice;
 
     
@@ -26,8 +26,10 @@ public class Paper extends Account {
         response.append( " Object {\n" );
         
         // Append subclass specific properties
-        response.append("  ").append("paperRecord : ").append( paperRecord).append("\n");
-        response.append("  ").append("paperPrice : ").append( paperPrice).append("\n");
+        response.append("  ").append("Date Created : ").append( this.getCreatedDate() ).append("\n");
+        response.append("  ").append("Paper Record : ").append( paperRecord).append("\n");
+        response.append("  ").append("Paper Price : ").append( paperPrice).append("\n");
+        response.append("  ").append("Total #'s Sold: ").append( this.getTotalPoundsOfPaperSold() ).append("\n");
         
         response.append("}\n");
               
@@ -37,20 +39,22 @@ public class Paper extends Account {
     } // end method
     
     
-    public Paper() {
-        super();
-    }
-
-    
     Paper( double price ){
         paperPrice = price;
         System.out.println( "Paper price set at: " + paperPrice );
     }
     
+    public void recordPaperSale( int poundsSold ){
+        paperRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
+    }
     
     public double getTotalPoundsOfPaperSold(){
         double totalSold = 0;
-        //@TODO Write a totalling loop
+        
+        for( int i = 0; i < this.paperRecord.size(); i++ ){
+            totalSold += this.paperRecord.get(i).getQuantity();
+        }
+        
         return totalSold;
     } // end method
     

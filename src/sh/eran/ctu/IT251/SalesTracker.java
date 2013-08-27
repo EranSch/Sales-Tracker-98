@@ -17,13 +17,19 @@ public class SalesTracker {
         
         String line = "-----------------------------------------";
         
-        Paper testPaperAccount = new Paper();
+        Paper testPaperAccount = new Paper( 1 );
+        testPaperAccount.recordPaperSale( 400 );
+        testPaperAccount.recordPaperSale( 125 );
+        System.out.println( "Total Pounds Sold: " + testPaperAccount.getTotalPoundsOfPaperSold() );
         System.out.println( line );
         System.out.println( testPaperAccount );
         
         System.out.println( "" );
                
         Supplies testSuppliesAccount = new Supplies();
+        testSuppliesAccount.addSale( new Transaction( "Pens", "Ball Point", 500, 0.2 ) );
+        testSuppliesAccount.addSale( new Transaction( "RAM", "2GB", 3, 25.95 ) );
+        System.out.println( "Total Sales: " + testSuppliesAccount.getTotalSales() );
         System.out.println( line );
         System.out.println( testSuppliesAccount );
         
