@@ -7,16 +7,22 @@ import java.util.ArrayList;
  * @author eran
  */
 public class Supplies extends Account {
+
+    /*
+     * ========================= INSTANCE VARIABLES ===========================
+     */        
     
     private ArrayList<Transaction> salesRecord = new ArrayList<Transaction>();
     
+    
+
+    /*
+     * ========================= toString() METHOD =============================
+     */    
+    
     @Override
     public String toString() {
-        
-        /*
-         * We're using StringBuilder in order to test it's functionality against
-         * that of basic print commands. It just seems cleaner...
-         */
+
         StringBuilder response = new StringBuilder();
                 
         // First print the name
@@ -35,10 +41,16 @@ public class Supplies extends Account {
         return response.toString();
         
     } // end method
+
+    
+    
+    /*
+     * ============================ CLASS METHODS ==============================
+     */     
     
     public void addSale( Transaction sale ){
         salesRecord.add( sale );
-    }
+    }   
     
     public int getTotalSales(){
         return salesRecord.size();

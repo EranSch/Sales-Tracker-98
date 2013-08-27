@@ -8,17 +8,46 @@ import java.util.ArrayList;
  */
 public class Paper extends Account {
     
+    /*
+     * ========================= INSTANCE VARIABLES ===========================
+     */ 
+    
     private ArrayList<Transaction> paperRecord = new ArrayList<Transaction>();
     private double paperPrice;
 
+    
+    
+    /*
+     * ======================== CONSTRUCTOR METHODS ============================
+     */  
+    
+    Paper(){
+        /*
+         * It seems that the subclass won't use the overridden no-args constructor
+         * of the superclass unless this empty constructor is defined. Weird...
+         */
+    }
+    
+    Paper( double price ){
+        paperPrice = price;
+        System.out.println( "Paper price set at: " + paperPrice );
+    }
+    
+    
+    
+    /*
+     * ========================= toString() METHOD =============================
+     */
     
     @Override
     public String toString() {
         
         /*
          * We're using StringBuilder in order to test it's functionality against
-         * that of basic print commands. It just seems cleaner...
+         * that of basic print commands. It just seems cleaner... Perhaps there
+         * are some other benefits too...
          */
+        
         StringBuilder response = new StringBuilder();
                 
         // First print the name
@@ -39,10 +68,10 @@ public class Paper extends Account {
     } // end method
     
     
-    Paper( double price ){
-        paperPrice = price;
-        System.out.println( "Paper price set at: " + paperPrice );
-    }
+    
+    /*
+     * ============================ CLASS METHODS ==============================
+     */     
     
     public void recordPaperSale( int poundsSold ){
         paperRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
@@ -59,10 +88,14 @@ public class Paper extends Account {
     } // end method
     
     
+    
+    /*
+     * ======================== BASIC GETTERS/SETTERS ==========================
+     */    
+    
     public double getPaperPrice(){
         return paperPrice;
     }
-    
     
     public void setPaperPrice( double newPrice ){
         paperPrice = newPrice;

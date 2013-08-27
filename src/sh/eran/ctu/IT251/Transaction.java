@@ -9,13 +9,43 @@ import java.util.Date;
  */
 public class Transaction {
     
+    /*
+     * ======================= STATIC CLASS VARIABLES ==========================
+     */  
+    
+    /*
+     * Like anything else, we will need to track how many instances are floating
+     * around so we can assign the correct ID to each one.
+     */
+    
     public static int totalObjects;
+    
+    
+    /*
+     * ========================= INSTANCE VARIABLES ===========================
+     */    
+    
+    /*
+     * Because this object has been designed primarily to just hold information
+     * of varying types, this is really the bread and butter. 
+     */
     
     private String ID, name, description;
     private double quantity;
     private double itemCost;
     private Date date;
 
+    
+    /*
+     * ======================== CONSTRUCTOR METHODS ============================
+     */
+    
+    /*
+     * This object also needs some special considerations to make sure new entries
+     * get recorded correctly. Specifically, each object should be instantiated 
+     * with a unique ID and the date at which it was created.
+     */
+    
     public Transaction(
             String name, 
             String description, 
@@ -31,7 +61,18 @@ public class Transaction {
        this.date = Calendar.getInstance().getTime();
        this.ID = String.valueOf( totalObjects++ );
         
-    } // end constructor
+    }
+    
+    
+    
+    /*
+     * ========================= toString() METHOD =============================
+     */
+    
+    /*
+     * Because of all the emphasis on toString overriding in this assignment, it 
+     * seemed proper to give this class the same treatment. 
+     */
 
     @Override
     public String toString() {
@@ -50,6 +91,11 @@ public class Transaction {
         return response.toString();
         
     } // end method
+    
+    
+    /*
+     * ======================== BASIC GETTERS/SETTERS ==========================
+     */    
     
     public double getTotal(){
         return quantity * itemCost;
