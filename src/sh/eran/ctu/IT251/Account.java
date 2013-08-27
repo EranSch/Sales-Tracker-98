@@ -29,6 +29,25 @@ public abstract class Account {
     
     private Date createdDate;
     
+    
+    /*
+     * ======================== CONSTRUCTOR METHODS ============================
+     */
+    
+    /*
+     * Until the needs of the application become more advanced, this abstract 
+     * class will remain fairly simple.
+     */
+    
+    protected Account(){
+        
+       accountID = String.valueOf(NumOfAccounts++);
+       this.createdDate = Calendar.getInstance().getTime();
+       
+       System.out.println( this.getClass().getSimpleName() + " created! ( Account ID: " + accountID + " )");
+    }
+    
+    
     /*
      * ======================== BASIC GETTERS/SETTERS ==========================
      */
@@ -72,23 +91,5 @@ public abstract class Account {
     public Date getCreatedDate(){
         return createdDate;
     }
-    
-    /*
-     * ======================== CONSTRUCTOR METHODS ============================
-     */
-    
-    /*
-     * Until the needs of the application become more advanced, this abstract 
-     * class will remain fairly simple.
-     */
-    
-    protected Account(){
         
-       accountID = String.valueOf(NumOfAccounts++);
-       this.createdDate = Calendar.getInstance().getTime();
-       
-       System.out.println( this.getClass().getSimpleName() + " created! ( Account ID: " + accountID + " )");
-    }
-
-    
 } // end class

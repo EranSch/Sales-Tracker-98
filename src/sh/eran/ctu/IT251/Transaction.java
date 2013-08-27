@@ -12,15 +12,16 @@ public class Transaction {
     public static int totalObjects;
     
     private String ID, name, description;
-    private int quantity;
+    private double quantity;
     private double itemCost;
     private Date date;
 
     public Transaction(
             String name, 
             String description, 
-            int quantity, 
-            double itemCost) {
+            double quantity, 
+            double itemCost
+            ) {
         
         this.name = name;
         this.description = description;
