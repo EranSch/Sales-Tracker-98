@@ -1,7 +1,5 @@
 package sh.eran.ctu.IT251;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author eran
@@ -11,9 +9,7 @@ public class Supplies extends Account {
     /*
      * ========================= INSTANCE VARIABLES ===========================
      */        
-    
-    private ArrayList<Transaction> salesRecord = new ArrayList<Transaction>();
-    
+        
     
 
     /*

@@ -1,5 +1,6 @@
 package sh.eran.ctu.IT251;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,6 +29,8 @@ public abstract class Account {
             contactEmail;
     
     private Date createdDate;
+    
+    protected ArrayList<Transaction> salesRecord = new ArrayList<Transaction>();
     
     
     /*

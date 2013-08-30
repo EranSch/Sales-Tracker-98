@@ -1,7 +1,5 @@
 package sh.eran.ctu.IT251;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author eran
@@ -12,7 +10,6 @@ public class Paper extends Account {
      * ========================= INSTANCE VARIABLES ===========================
      */ 
     
-    private ArrayList<Transaction> paperRecord = new ArrayList<Transaction>();
     private double paperPrice;
 
     
@@ -56,7 +53,7 @@ public class Paper extends Account {
         
         // Append subclass specific properties
         response.append("  ").append("Date Created : ").append( this.getCreatedDate() ).append("\n");
-        response.append("  ").append("Paper Record : ").append( paperRecord).append("\n");
+        response.append("  ").append("Paper Record : ").append( salesRecord).append("\n");
         response.append("  ").append("Paper Price : ").append( paperPrice).append("\n");
         response.append("  ").append("Total #'s Sold: ").append( this.getTotalPoundsOfPaperSold() ).append("\n");
         
@@ -74,14 +71,14 @@ public class Paper extends Account {
      */     
     
     public void recordPaperSale( int poundsSold ){
-        paperRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
+        salesRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
     }
     
     public double getTotalPoundsOfPaperSold(){
         double totalSold = 0;
         
-        for( int i = 0; i < this.paperRecord.size(); i++ ){
-            totalSold += this.paperRecord.get(i).getQuantity();
+        for( int i = 0; i < this.salesRecord.size(); i++ ){
+            totalSold += this.salesRecord.get(i).getQuantity();
         }
         
         return totalSold;
