@@ -30,7 +30,7 @@ public abstract class Account {
     
     private Date createdDate;
     
-    protected ArrayList<Transaction> salesRecord = new ArrayList<Transaction>();
+    protected ArrayList<Transaction> salesRecord = new ArrayList<>();
     
     
     /*
@@ -48,6 +48,44 @@ public abstract class Account {
        this.createdDate = Calendar.getInstance().getTime();
        
        System.out.println( this.getClass().getSimpleName() + " created! ( Account ID: " + accountID + " )");
+    }
+
+    
+    /*
+     * ============================ CLASS METHODS ==============================
+     */      
+    
+    /*
+     * Not sure that I really need to define this as it must be overridden in all
+     * of the existing subclasses but whatever. I suppose it does serve as a good
+     * defualt or guide for the basic implementation.
+     */
+    
+    public void addSale( 
+            String name, 
+            String description,
+            double quantity,
+            double itemCost ){
+        
+        salesRecord.add( new Transaction( name, description, quantity, itemCost ) );
+        
+    }
+    
+    /*
+     * Same deal here, this will just be a generic implementation and should be
+     * customized to the sale type in each subclass. 
+     */
+    
+    public double computeSales(){
+        
+        double totalSales = 0; // Variable to aggregate sales 
+        
+        for ( Transaction t : salesRecord ){ // Loop through all sales
+            totalSales += t.getTotal(); 
+        }
+        
+        return totalSales; // Return
+        
     }
     
     
