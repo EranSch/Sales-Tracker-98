@@ -56,23 +56,7 @@ public abstract class Account {
      */      
     
     /*
-     * Not sure that I really need to define this as it must be overridden in all
-     * of the existing subclasses but whatever. I suppose it does serve as a good
-     * defualt or guide for the basic implementation.
-     */
-    
-    public void addSale( 
-            String name, 
-            String description,
-            double quantity,
-            double itemCost ){
-        
-        salesRecord.add( new Transaction( name, description, quantity, itemCost ) );
-        
-    }
-    
-    /*
-     * Same deal here, this will just be a generic implementation and should be
+     * This will just be a generic implementation and should be
      * customized to the sale type in each subclass. 
      */
     
