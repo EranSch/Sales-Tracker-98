@@ -94,7 +94,7 @@ public class Transaction {
     
     
     /*
-     * ======================== BASIC GETTERS/SETTERS ==========================
+     * ============================ CLASS METHODS ==============================
      */    
     
     public double getTotal(){
@@ -104,5 +104,50 @@ public class Transaction {
     public double getQuantity(){
         return this.quantity;
     }
+    
+    
+    /*
+     * ======================== BASIC GETTERS/SETTERS ==========================
+     */
 
-}
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getItemCost() {
+        return itemCost;
+    }
+
+    public void setItemCost(double itemCost) {
+        this.itemCost = itemCost;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+   
+} // end class
