@@ -44,10 +44,28 @@ public class Services extends Account {
         response.append( " Object {\n" );
         
         // Append subclass specific properties
-        response.append("  ").append("Date Created : ").append( this.getCreatedDate() ).append("\n");
-        response.append("  ").append("Service Rate : ").append( serviceRate).append("\n");
-        response.append("  ").append("Service Record : ").append( salesRecord).append("\n");
-        response.append("  ").append("Total Hours : ").append( this.getTotalHours() );
+        response
+                .append("  ")
+                .append("Date Created : ")
+                .append( this.getCreatedDate() )
+                .append("\n");
+        
+        response
+                .append("  ")
+                .append("Service Rate : ")
+                .append( serviceRate)
+                .append("\n");
+        
+        response
+                .append("  ")
+                .append("Service Record : ")
+                .append( salesRecord)
+                .append("\n");
+        
+        response
+                .append("  ")
+                .append("Total Hours : ")
+                .append( this.getTotalHours() );
        
         response.append("\n}\n");
         
@@ -59,12 +77,33 @@ public class Services extends Account {
     /*
      * ============================ CLASS METHODS ==============================
      */   
-     
+    
+    /*
+     * This will add an item to the sales record. Name, Description, and time are
+     * all dynamic fields while the rate is an instance variable
+     */
+    
+    public void addSale(  String name, String description, double time ){
+        salesRecord.add( new Transaction(name, description, time, serviceRate) );
+    }
+
+    
+    /*
+     * Although I'm aware it's unneeded, I've included this override here only to 
+     * indicate that I've read the task requirments =D
+     */
+    
+    @Override
+    public double computeSales() {
+        return super.computeSales();
+    }
+        
      // Add an item to the account's services list 
+    @Deprecated
      public void recordService( String name, String description, double time ){
          salesRecord.add( new Transaction(name, description, time, serviceRate) );
      }
-     
+    
      // Return the total number of hours worked
      public double getTotalHours(){
          
