@@ -1,6 +1,10 @@
 package sh.eran.ctu.IT251;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -126,5 +130,34 @@ public class IO {
         return userReply.equals("y");
         
     } // end method
+    
+    /*
+     * ============================= IO.printMenu =============================
+     */ 
+    
+    /*
+     * Attempting to devise a clean means of handling text-based menus. This is 
+     * the latest-- Pass an array with each menu option and a message to be 
+     * displayed to the user and this will retrun an integer corresponding to 
+     * the value selected by the user.
+     * 
+     * NOTE: While this will display the index numbers in one-base (1 , 2, 3 [...]) 
+     * it will return a value in zero-base (0, 1, 2, [...]). My theory is that 
+     * the user should never see zero-base numerals however they should be used
+     * when appropriate on the backend :)
+     * 
+     */
+    
+    public static int printMenu( String[] labels, String message ){
+
+        for( int i=0; i < labels.length; i++  ){
+            
+            IO.print( "[" + ( i + 1 ) + "] "+ labels[i] );
+            
+        }
+        
+        return ( IO.getInt( message, labels.length ) - 1 );
+        
+    }
     
 }
