@@ -70,10 +70,39 @@ public class Paper extends Account {
      * ============================ CLASS METHODS ==============================
      */     
     
+    public void addSale( double poundsSold ){
+        salesRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
+    }
+
+    /*
+     * Although I'm aware it's unneeded, I've included this override here only to 
+     * indicate that I've read the task requirments =D
+     */
+    
+    @Override
+    public double computeSales() {
+        return super.computeSales();
+    }
+    
+    
+    /*
+     * Although this has been replaced by something of the same basic function, 
+     * the Account subclasses should all conform in terms of exposing the same
+     * basic actions. 
+     * 
+     * Replaced by addSale()
+     * 
+     */
+    @Deprecated
     public void recordPaperSale( int poundsSold ){
         salesRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );
     }
     
+    /*
+     * Similar story; replaced by computeSales()
+     */
+    
+    @Deprecated
     public double getTotalPoundsOfPaperSold(){
         double totalSold = 0;
         
