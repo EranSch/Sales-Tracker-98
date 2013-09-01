@@ -1,15 +1,10 @@
 package sh.eran.ctu.IT251;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * 
  * @author eran
- * @version 1.1
+ * @version 1.2
  * 
  * This class was developed to remove some of the mundane tasks involved in
  * communicating with the user. Expect to see simplifications in terms of
