@@ -9,14 +9,14 @@ public class SalesTracker {
     public static void main(String[] args) {
         
         // Invoke the test method (defined below)!
-        SalesTracker.test();
+        test();
         
     }
     
     public static void test(){
         
         // Just some formatting strings
-        String line = "-----------------------------------------";
+        String line = "\n";
         String dblLine = "=============";
         
     /*
@@ -32,17 +32,16 @@ public class SalesTracker {
         /*
          * Using a method of Paper class, we'll record some sales...
          */
-        testPaperAccount.recordPaperSale( 400 );
-        testPaperAccount.recordPaperSale( 125 );
+        testPaperAccount.addSale( 400 );
+        testPaperAccount.addSale( 125 );
         
         /*
          * Now that the object has seen some action, lets look at the results...
          * Notice, on line 42, that we're invoking the toString method of the 
          * object by printing its reference name to the console.
          */
-        System.out.println( "Total Pounds Sold: " + testPaperAccount.getTotalPoundsOfPaperSold() );
-        System.out.println( line );
-        System.out.println( testPaperAccount );
+
+        testPaperAccount.computeSales();
         
         
     /*
@@ -55,21 +54,42 @@ public class SalesTracker {
         System.out.println( "\n" + dblLine + " SUPPLY ACCOUNT TEST " + dblLine);
         Supplies testSuppliesAccount = new Supplies();
         
+        
         /*
-         * Once again, transactions are recorded using a local method. In this 
-         * instance, more data is required by the method in order to make a 
-         * succesful sale.
+         * This got a little weird. I wanted to play with throwing an exception 
+         * if the description type didn't match one of the allowed categories.
+         * I'm really not sure if this is the smart way to do this or not,
+         * Obviously there woulb need to be some more interactive validation 
+         * going on but I figure that would be something left to the interface...
          */
-        testSuppliesAccount.addSale( new Transaction( "Pens", "Ball Point", 500, 0.2 ) );
-        testSuppliesAccount.addSale( new Transaction( "RAM", "2GB", 3, 25.95 ) );
+        try {
+            testSuppliesAccount.addSale( "T-shirt", "apparel", 500, 0.2 );
+        } catch (Exception ex) {
+            IO.print(ex.toString());
+        }
+        
+        try {
+            testSuppliesAccount.addSale( "Pens", "supplies", 3000, 0.05 );
+        } catch (Exception ex) {
+            IO.print(ex.toString());
+        }
+        
+        try {
+            testSuppliesAccount.addSale( "Java How to Program: Early Objects Version", "book", 3, 25.95 );
+        } catch (Exception ex) {
+            IO.print(ex.toString());
+        }
+
+        try {
+            testSuppliesAccount.addSale( "This should break", "Disallowed Item", 3, 25.95 );
+        } catch (Exception ex) {
+            IO.print(ex.toString());
+        }
         
         /*
          * Finally, we'll see what data has been accumulated in the object.
          */
-        System.out.println( "Total Sales: " + testSuppliesAccount.getTotalSales() );
-        System.out.println( line );
-        System.out.println( testSuppliesAccount );
-        
+        testSuppliesAccount.computeSales();
         
     /*
      * =========================== SERVICE ACCOUNTS ============================
@@ -86,15 +106,31 @@ public class SalesTracker {
          * need to require it when recording sales here. Instead, the rate can be
          * changed via the class's getters/setters.
          */
-        testServicesAccount.recordService("PC Repair", "Formatted and reinstalled OS", 3.25);
-        testServicesAccount.recordService("PC Repair", "Removed spywayre", 0.125);
+        testServicesAccount.addSale("PC Repair", "Formatted and reinstalled OS", 3.25);
+        testServicesAccount.addSale("PC Repair", "Removed spywayre", 0.125);
         
         /*
          * Watch as the Services class outputs its glorious properties!
          */
-        System.out.println( "Total Hours: " + testServicesAccount.getTotalHours() );
-        System.out.println( line );
-        System.out.println( testServicesAccount );
-    }
+        testServicesAccount.computeSales();
+        
+       IO.print( line );
+       
+       
+       /*
+        * In order to produce cleaner output yet still keep testing as verbose as
+        * possible, the toString outputs of each test class have been moved here 
+        * and have been made optional via prompt at the console. 
+        */
+        
+       if( IO.getConfirm("Would you like the view the object contents?") ){
+           
+           IO.print( testPaperAccount.toString() );
+           IO.print( testSuppliesAccount.toString() );
+           IO.print( testServicesAccount.toString() );
+           
+       }
+        
+    } // end method
     
 }

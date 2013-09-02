@@ -68,6 +68,8 @@ public abstract class Account {
             totalSales += t.getTotal(); 
         }
         
+        IO.print( "Total Sales: " + totalSales );
+        
         return totalSales; // Return
         
     }

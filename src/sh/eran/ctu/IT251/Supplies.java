@@ -5,6 +5,8 @@ package sh.eran.ctu.IT251;
  * @author eran
  */
 public class Supplies extends Account {
+
+    
     /*
      * ========================= toString() METHOD =============================
      */    
@@ -69,7 +71,7 @@ public class Supplies extends Account {
                 !type.equalsIgnoreCase("apparel")
                 ){
             
-        throw new Exception("Invalid Supply Type");  
+            throw new Exception("Invalid Supply Type");  
             
         }
         
@@ -89,7 +91,8 @@ public class Supplies extends Account {
         
         double  totalSupplies = 0,
                 totalBooks = 0,
-                totalApparel = 0;
+                totalApparel = 0,
+                totalSales;
                 
         for( Transaction t : salesRecord ){
             
@@ -106,17 +109,22 @@ public class Supplies extends Account {
                 case "apparel":
                     totalApparel += t.getTotal();
                     break;
+                    
+                default:
+                    break;
                 
             }
             
         }
         
+        totalSales = totalSupplies + totalBooks + totalApparel;
+        
         IO.print( "Total in Supplies: "  + totalSupplies );
         IO.print( "Total in Books:    "  + totalBooks );
         IO.print( "Total in Apparel:  "  + totalApparel );
-        IO.print( "Total Overall:     "  + super.computeSales() );
+        IO.print( "Total Overall:     "  + totalSales );
                 
-        return super.computeSales();
+        return totalSales;
         
     }
     

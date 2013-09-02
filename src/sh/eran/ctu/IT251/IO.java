@@ -146,9 +146,7 @@ public class IO {
     public static int printMenu( String[] labels, String message ){
 
         for( int i=0; i < labels.length; i++  ){
-            
             IO.print( "[" + ( i + 1 ) + "] "+ labels[i] );
-            
         }
         
         return ( IO.getInt( message, labels.length ) - 1 );

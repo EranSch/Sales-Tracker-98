@@ -27,7 +27,6 @@ public class Paper extends Account {
     
     Paper( double price ){
         paperPrice = price;
-        System.out.println( "Paper price set at: " + paperPrice );
     }
     
     
