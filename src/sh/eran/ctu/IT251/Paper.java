@@ -80,7 +80,17 @@ public class Paper extends Account {
     
     @Override
     public double computeSales() {
-        return super.computeSales();
+        
+        double totalSales = 0; // Variable to aggregate sales 
+        
+        for ( Transaction t : salesRecord ){ // Loop through all sales
+            totalSales += t.getTotal(); 
+        }
+        
+        IO.print( "Total Sales: " + totalSales );
+        
+        return totalSales; // Return
+        
     }
     
     

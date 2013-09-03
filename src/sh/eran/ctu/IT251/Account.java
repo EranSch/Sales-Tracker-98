@@ -60,19 +60,7 @@ public abstract class Account {
      * customized to the sale type in each subclass. 
      */
     
-    public double computeSales(){
-        
-        double totalSales = 0; // Variable to aggregate sales 
-        
-        for ( Transaction t : salesRecord ){ // Loop through all sales
-            totalSales += t.getTotal(); 
-        }
-        
-        IO.print( "Total Sales: " + totalSales );
-        
-        return totalSales; // Return
-        
-    }
+    public abstract double computeSales();
     
     
     /*
