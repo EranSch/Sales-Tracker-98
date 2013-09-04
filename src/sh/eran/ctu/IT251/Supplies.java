@@ -4,7 +4,10 @@ package sh.eran.ctu.IT251;
  *
  * @author eran
  */
-public class Supplies extends Account {
+public class Supplies 
+    extends Account 
+    implements Account.addSale
+{
 
     
     /*

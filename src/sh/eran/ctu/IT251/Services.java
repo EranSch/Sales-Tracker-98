@@ -5,7 +5,10 @@ package sh.eran.ctu.IT251;
  *
  * @author eran
  */
-public class Services extends Account {
+public class Services 
+    extends Account
+    implements Account.addSale
+{
     
     /*
      * ========================= INSTANCE VARIABLES ===========================

@@ -9,11 +9,12 @@ public class SalesTracker {
     public static void main(String[] args) {
         
         // Invoke the test method (defined below)!
-        test();
+        SalesTracker test = new SalesTracker();
+        test.test();
         
     }
     
-    public static void test(){
+    public void test(){
         
         // Just some formatting strings
         String line = "\n";

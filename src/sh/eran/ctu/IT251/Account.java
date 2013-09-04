@@ -61,6 +61,7 @@ public abstract class Account {
      */
     
     public abstract double computeSales();
+    public interface addSale{};
     
     
     /*
