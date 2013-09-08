@@ -66,16 +66,14 @@ public class Supplies
             String type, 
             int quantity, 
             double itemCost 
-            ) throws Exception{
+            ) {
         
         if( 
                 !type.equalsIgnoreCase("book") && 
                 !type.equalsIgnoreCase("supplies") &&
                 !type.equalsIgnoreCase("apparel")
                 ){
-            
-            throw new Exception("Invalid Supply Type");  
-            
+                        
         }
         
         salesRecord.add( new Transaction( name, type, quantity, itemCost ) );

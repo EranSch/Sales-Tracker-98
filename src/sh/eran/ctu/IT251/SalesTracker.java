@@ -1,7 +1,8 @@
 package sh.eran.ctu.IT251;
 
+import java.util.Random;
+
 /**
- *
  * @author eran
  */
 public class SalesTracker {
@@ -10,11 +11,97 @@ public class SalesTracker {
         
         // Invoke the test method (defined below)!
         SalesTracker test = new SalesTracker();
-        test.test();
+        test.testIP3();
+        
+    }
+
+    /*
+    * This test will demonstrate the true value of polymorphism in terms
+    * of subclasses inheriting methods from abstract superclasses. 
+    * 
+    * Because this is kind of boring, we'll spice it up by at least making 
+    * the test group really big! Now I know, this wouldn't be the practical 
+    * way of doing something like this IRL but who cares?
+    */
+
+    private void testIP3() {
+        
+        // How does 10,000 test accounts sound?
+        Account [] accounts = new Account[10000];
+        
+        /*
+         * In order to create a mix of the different subclasses, we'll use some
+         * simple iteration logic to rotate what's instantiated for each position
+         * in the array.
+         */
+        int rotator = 0;
+        
+        // Also, lets see how long this all takes. MMkay?
+        long timeStart = System.currentTimeMillis();
+        
+        // We'll also use some random numbers for everying... For fun. 
+        Random rg = new Random();
+        
+        for( int i = 1; i < accounts.length; i++ ){
+            switch (rotator){
+                case 0:
+                    accounts[i] = new Paper( 1 );
+                    ((Paper)accounts[i]).addSale( ( rg.nextInt(1000) * 10 ) );
+                    rotator++;
+                    break;
+                case 1:
+                    accounts[i] = new Services();
+                    ((Services)accounts[i]).addSale("PC Repair", "Formatted and reinstalled OS", (rg.nextDouble() * 30) );
+                    rotator++;
+                    break;
+                case 2:
+                    accounts[i] = new Supplies();
+                    ((Supplies)accounts[i]).addSale( "T-shirt", "apparel", ( rg.nextInt(1000) * 10 ), 0.2 );
+                    rotator = 0;
+                    break;
+            }
+        }
+            
+        /*
+         * That was fun! 
+         */
+            
+        IO.clearConsole();
+        IO.print( accounts.length + " Accounts created in " + ( System.currentTimeMillis() - timeStart ) + "ms" );
+            
+        if(IO.getConfirm( "Would you like to compute the total sales?" )){
+
+            long aggregateTotal = 0;
+            timeStart = System.currentTimeMillis();
+            
+            /*
+             * So here's the bread and butter of this beast-- We can now iterate
+             * through the entire array of subclasses and call upon each with the
+             * overridden, abstract method computeSales. Because the method is 
+             * abstract in the superclass, no casting or anything needs to happen
+             * because it's an expected behavior of Account. Woohoo!
+             */
+
+            for( int i = 1; i < accounts.length; i++ ){
+                System.out.println( aggregateTotal += accounts[i].computeSales() );
+            }   
+
+            IO.clearConsole();
+            IO.print("Total Sales across all accounts: $" + String.valueOf(aggregateTotal));
+            IO.print( "Calculated in " + ( System.currentTimeMillis() - timeStart ) + "ms" );
+
+        }else{
+            System.exit(0);
+        }
         
     }
     
-    public void test(){
+    /*
+     * Test method for IP1/2
+     */
+    
+    @Deprecated
+    private void testIP2(){
         
         // Just some formatting strings
         String line = "\n";
@@ -132,6 +219,6 @@ public class SalesTracker {
            
        }
         
-    } // end method
+    } 
     
 }
