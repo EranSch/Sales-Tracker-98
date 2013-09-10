@@ -1,12 +1,14 @@
 package sh.eran.ctu.IT251;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eran
  */
 public class Paper 
     extends Account 
-    implements Account.addSale 
+    implements Account.addSale
 {
     
     /*
@@ -70,7 +72,16 @@ public class Paper
     
     /*
      * ============================ CLASS METHODS ==============================
-     */     
+     */   
+    
+    static Paper createAccount() {
+        return new Paper( IO.getDouble("Please enter the fixed paper price for this account.") );
+    }
+    
+    @Override
+    public void addSale(){
+        salesRecord.add( new Transaction( "Paper", "Paper sold by the pound", IO.getDouble("Enter number of pounds sold."), this.getPaperPrice() ) );
+    }
     
     public void addSale( double poundsSold ){
         salesRecord.add( new Transaction( "Paper", "Paper sold by the pound", poundsSold, this.getPaperPrice() ) );

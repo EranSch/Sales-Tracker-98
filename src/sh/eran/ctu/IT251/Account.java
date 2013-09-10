@@ -61,6 +61,7 @@ public abstract class Account {
      */
     
     public abstract double computeSales();
+    public abstract void addSale();
     public interface addSale{};
     
     
@@ -106,6 +107,9 @@ public abstract class Account {
     
     public Date getCreatedDate(){
         return createdDate;
+    }
+    public int getNumOfSales(){
+        return salesRecord.size();
     }
         
 } // end class

@@ -1,5 +1,6 @@
 package sh.eran.ctu.IT251;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -150,6 +151,54 @@ public class IO {
         }
         
         return ( IO.getInt( message, labels.length ) - 1 );
+        
+    }
+    
+    public static double getDouble ( String message ){
+        double userDouble = 0;
+        
+        do{
+            try{
+                userDouble = Double.valueOf( JOptionPane.showInputDialog(null, message) );
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "You must enter a number.", "Message", 0);
+            }
+        }while( userDouble == 0 );
+        
+        return userDouble;        
+    }
+    
+    public static String getString( String message ){
+        
+        String response = "";
+        
+           do{
+                try{
+                    response = JOptionPane.showInputDialog(null, message );
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Please try again.");
+                }
+                
+            }while( response.equals("") );
+           
+           return response;
+        
+    }
+    
+    public static int getInt( String message ){
+        
+        int response = 0;
+        
+           do{
+                try{
+                    response = Integer.valueOf( JOptionPane.showInputDialog(null, message ) );
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Please enter a whole number, greater than 0");
+                }
+                
+            }while( response == 0 );
+           
+           return response;
         
     }
     

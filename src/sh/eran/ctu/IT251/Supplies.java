@@ -1,5 +1,7 @@
 package sh.eran.ctu.IT251;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eran
@@ -78,7 +80,34 @@ public class Supplies
         
         salesRecord.add( new Transaction( name, type, quantity, itemCost ) );
         
-    }   
+    } 
+    
+    @Override
+    public void addSale() {
+            
+            String  name = "", 
+                    type = "";
+            int quantity;
+            double itemCost;
+            
+            name = IO.getString("Enter a name for the items sold.");
+            
+            do{
+                try{
+                    type = JOptionPane.showInputDialog(null, "What type of supply is this? (Must be either 'book' , 'supplies' , or 'apparel')");
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Please try again.");
+                }
+                
+            }while( !type.equals("book") && !type.equals("supplies") && !type.equals("apparel") );
+            
+            quantity = IO.getInt("Enter the quantity sold.");
+            
+            itemCost = IO.getDouble("Enter the item cost (per item).");
+            
+        salesRecord.add( new Transaction( name, type, quantity, itemCost ) );
+        
+    }
 
     
     /*
@@ -135,7 +164,6 @@ public class Supplies
     public int getTotalSales(){
         return salesRecord.size();
     }
-
 
     
 }

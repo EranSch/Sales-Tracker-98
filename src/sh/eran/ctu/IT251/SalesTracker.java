@@ -11,7 +11,7 @@ public class SalesTracker {
         
         // Invoke the test method (defined below)!
         SalesTracker test = new SalesTracker();
-        test.testIP3();
+        //test.testIP3( 10000 );
         
     }
 
@@ -24,10 +24,10 @@ public class SalesTracker {
     * way of doing something like this IRL but who cares?
     */
 
-    private void testIP3() {
+    private void testIP3( int numOfAccounts ) {
         
         // How does 10,000 test accounts sound?
-        Account [] accounts = new Account[10000];
+        Account [] accounts = new Account[numOfAccounts];
         
         /*
          * In order to create a mix of the different subclasses, we'll use some

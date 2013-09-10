@@ -1,20 +1,20 @@
 
 package sh.eran.ctu.IT251;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eran
  */
-public class Services 
-    extends Account
-    implements Account.addSale
+public class Services extends Account
 {
     
     /*
      * ========================= INSTANCE VARIABLES ===========================
      */    
     
-     private int serviceRate = 50;
+     private double serviceRate = 50;
 
     /*
      * ======================== CONSTRUCTOR METHODS ============================
@@ -29,7 +29,7 @@ public class Services
      }
              
      
-     Services( int serviceRate ){
+     Services( double serviceRate ){
          this.serviceRate = serviceRate;
      }
      
@@ -90,6 +90,19 @@ public class Services
         salesRecord.add( new Transaction(name, description, time, serviceRate) );
     }
 
+    @Override
+    public void addSale() {
+                 
+        String name = IO.getString("Enter a name for the service provided.");
+        String description = IO.getString("Enter a description for the service.");
+        double time = IO.getDouble("Enter the time recorded for the service.");
+        
+        salesRecord.add( new Transaction(name, description, time, this.serviceRate) );
+         
+    }
+    
+    
+
     
     /*
      * Although I'm aware it's unneeded, I've included this override here only to 
@@ -128,16 +141,33 @@ public class Services
         return totalHours;
      }
      
+    static Services createAccount() {
+        
+        double desiredRate = 0;
+        
+        do{
+            try{
+                desiredRate = Integer.valueOf( JOptionPane.showInputDialog(null, "Please enter the fixed service for this account") );
+            }catch(Exception ex) {
+                JOptionPane.showMessageDialog(null, "You must enter a number.", "Message", 0);
+            }
+            
+        }while( desiredRate == 0 );
+        
+        return new Services( desiredRate );
+        
+    }     
+     
 
     /*
      * ======================== BASIC GETTERS/SETTERS ==========================
      */
      
-    public int getServiceRate() {
+    public double getServiceRate() {
         return serviceRate;
     }
 
-    public void setServiceRate(int serviceRate) {
+    public void setServiceRate(double serviceRate) {
         this.serviceRate = serviceRate;
     }
      
