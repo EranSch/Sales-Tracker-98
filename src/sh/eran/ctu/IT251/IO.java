@@ -202,4 +202,15 @@ public class IO {
         
     }
     
+    public static boolean confirmDelete( String message ) {
+        
+          switch (JOptionPane.showConfirmDialog(null, message, "Warning!", 1, 2) ){
+               case 0:
+                   return true;
+               default:
+                   return false;
+           }
+        
+    }
+    
 }

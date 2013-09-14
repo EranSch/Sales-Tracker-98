@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sh.eran.ctu.IT251;
 
 import java.awt.Color;
@@ -12,11 +8,16 @@ import javax.swing.JToggleButton;
 /**
  *
  * @author Eran
+ * 
+ * Oh my, this class is kind of a mess... I'm not used to the application auto-
+ * generating so much. I'll try my best to keep things tidy however I'm sure
+ * I'm breaking all kinds of convention here. Sorry!
+ * 
  */
 public class MainWindow extends javax.swing.JFrame {
     
+    // Accounts array, to be used later.
     Account accounts[] = new Account[3];
-
     /**
      * Creates new form MainWindow
      */
@@ -69,7 +70,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         debugWindow.setTitle("Debug Output");
         debugWindow.setMinimumSize(new java.awt.Dimension(500, 400));
-        debugWindow.setPreferredSize(new java.awt.Dimension(400, 600));
 
         debugTextArea.setColumns(20);
         debugTextArea.setRows(5);
@@ -336,23 +336,31 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+     * =========================== Toggle Buttons =============================
+     */    
+    
+    /*
+     * clicking either of these buttons will evaluate if the button was already
+     * clicked, if is hasn't then it's appearance is toggled, the associated 
+     * object is instantiatied, and the add sale button is enabled. If it has,
+     * then the user is prompted and the account is nullified.
+     * 
+     * There's a bug here that needs to be handled, if the user attempts to 
+     * disable the account but cancels it during the IO.confirmDelete prompt then
+     * the buttons still get toggles while the account is left alone. The buttons
+     * are then out of sync.
+     */
+    
     private void paperToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paperToggleActionPerformed
 
        if(toggleThisButton(paperToggle, paperAddSale)){
            accounts[0] = Paper.createAccount();
            JOptionPane.showMessageDialog(this, "Paper Account Enabled!");
-       }else{
-           
-           switch (JOptionPane.showConfirmDialog(this, "This will erase all recorded sales for this account. Are you sure you want to do this?", "Warning!", 1, 2) ){
-               case 0:
-                    accounts[0] = null;
-                   break;
-               default:
-                   break;
-           }
-           
+       }else if(IO.confirmDelete("This will erase all recorded sales for this account. Are you sure you want to do this?")){
+            accounts[0] = null;
        }
-        
+       updateTotals(); 
     }//GEN-LAST:event_paperToggleActionPerformed
 
     private void suppliesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliesToggleActionPerformed
@@ -360,18 +368,10 @@ public class MainWindow extends javax.swing.JFrame {
        if(toggleThisButton(suppliesToggle, suppliesAddSale)){
            accounts[1] = new Supplies();
            JOptionPane.showMessageDialog(this, "Supplies Account Enabled!");
-       }else{
-           
-           switch (JOptionPane.showConfirmDialog(this, "This will erase all recorded sales for this account. Are you sure you want to do this?", "Warning!", 1, 2) ){
-               case 0:
-                    accounts[1] = null;
-                   break;
-               default:
-                   break;
-           }
-           
-       }        
-
+       }else if(IO.confirmDelete("This will erase all recorded sales for this account. Are you sure you want to do this?")){
+           accounts[1] = null;
+       } 
+       updateTotals();
     }//GEN-LAST:event_suppliesToggleActionPerformed
 
     private void servicesToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicesToggleActionPerformed
@@ -379,20 +379,17 @@ public class MainWindow extends javax.swing.JFrame {
        if(toggleThisButton(servicesToggle, servicesAddSale)){
            accounts[2] =  Services.createAccount();
            JOptionPane.showMessageDialog(this, "Services Account Enabled!");
-       }else{
-           
-           switch (JOptionPane.showConfirmDialog(this, "This will erase all recorded sales for this account. Are you sure you want to do this?", "Warning!", 1, 2) ){
-               case 0:
-                    accounts[2] = null;
-                   break;
-               default:
-                   break;
-           }
-           
+       }else if(IO.confirmDelete("This will erase all recorded sales for this account. Are you sure you want to do this?")){
+           accounts[2] = null;          
        }         
-
+        updateTotals();
     }//GEN-LAST:event_servicesToggleActionPerformed
 
+    
+    /*
+     * =========================== Reset Session =============================
+     */ 
+    
     private void resetSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSessionActionPerformed
         
         paperToggle.setSelected(false);
@@ -410,27 +407,45 @@ public class MainWindow extends javax.swing.JFrame {
         servicesAddSale.setEnabled(false);
         accounts[2] = null;
         
+        updateTotals();
         
     }//GEN-LAST:event_resetSessionActionPerformed
 
+    /*
+     * ========================= Toolbar exit button ===========================
+     */     
+    
     private void exitApplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitApplicationActionPerformed
-           switch (JOptionPane.showConfirmDialog(this, "Exiting will erase all sales recorded during this session.\n Are you sure you want to do this?", "Warning!", 1, 2) ){
-               case 0:
-                    System.exit(0);
-                   break;
-               default:
-                   break;
-           }
-           
-           updateTotals();
+        if(IO.confirmDelete("Exiting will erase all sales recorded during this session.\n Are you sure you want to do this?")){
+            System.exit(0);
+        }   
     }//GEN-LAST:event_exitApplicationActionPerformed
 
+    /*
+     * =========================== Add paper sale ==============================
+     */    
+    
     private void paperAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paperAddSaleActionPerformed
         accounts[0].addSale();
         updateTotals();
     }//GEN-LAST:event_paperAddSaleActionPerformed
 
+    /*
+     * ========================= Debug window stuff ============================
+     */     
+    
+    /*
+     * I couldn't help but add this, the debug window will show the current state
+     * of all three account objects. It should update whenever anything changes.
+     */
+    
     private void showDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDebugActionPerformed
+        
+        updateDebugWindow();
+        debugWindow.setVisible(true);
+    }//GEN-LAST:event_showDebugActionPerformed
+
+    private void updateDebugWindow(){
         
         debugTextArea.setText(null);
         
@@ -451,15 +466,17 @@ public class MainWindow extends javax.swing.JFrame {
         }catch(Exception ex){
             debugTextArea.append("Failed to generate debug output for services account.\nMaybe an account hasn't been created yet?\n");            
         }
-        
-        debugWindow.setVisible(true);
-    }//GEN-LAST:event_showDebugActionPerformed
-
+    }
+    
     private void suppliesAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppliesAddSaleActionPerformed
         accounts[1].addSale();
         updateTotals();
     }//GEN-LAST:event_suppliesAddSaleActionPerformed
 
+    /*
+     * ========================== Add services sale =============================
+     */  
+    
     private void servicesAddSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicesAddSaleActionPerformed
         accounts[2].addSale();
         updateTotals();
@@ -535,6 +552,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel totalTotalSales;
     // End of variables declaration//GEN-END:variables
 
+     /*
+     * ========================== Button Toggler  ==============================
+     */   
+    
+    /*
+     * This is poor coding at its finest and I should feel bad.
+     */
+    
     private boolean toggleThisButton(JToggleButton toggleButton, JButton saleButton) {
         
         if( toggleButton.isSelected() ){
@@ -549,9 +574,16 @@ public class MainWindow extends javax.swing.JFrame {
             return false;
         }
             
-        
-        
     }
+    
+
+    /*
+     * =========================== Update Totals ==============================
+     */  
+    
+    /*
+     * What fun is data entry if there isn't something updating in real time?
+     */
     
     private void updateTotals(){
         
@@ -608,5 +640,8 @@ public class MainWindow extends javax.swing.JFrame {
             System.out.println("Aggregate update failed.");
         }
         
+        if(debugWindow.isVisible()) updateDebugWindow();
+        
     }
+
 }
