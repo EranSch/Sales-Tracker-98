@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class SalesTracker {
 
-    public static void main(String[] args) {
+    public static void test() {
         
         // Invoke the test method (defined below)!
         SalesTracker test = new SalesTracker();
