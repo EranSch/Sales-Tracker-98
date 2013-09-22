@@ -2,8 +2,10 @@ package sh.eran.ctu.IT251;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
 
 /**
  *
@@ -67,6 +69,7 @@ public class MainWindow extends javax.swing.JFrame {
         exitApplication = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         showDebug = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         debugWindow.setTitle("Debug Output");
         debugWindow.setMinimumSize(new java.awt.Dimension(500, 400));
@@ -230,6 +233,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         jMenu2.add(showDebug);
+
+        jMenuItem1.setText("About SalesTracker98");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
 
@@ -482,6 +493,12 @@ public class MainWindow extends javax.swing.JFrame {
         updateTotals();
     }//GEN-LAST:event_servicesAddSaleActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Splash splash = new Splash();
+        splash.init( splash, getTotalSales() );
+              
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -527,6 +544,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -641,6 +659,28 @@ public class MainWindow extends javax.swing.JFrame {
         }
         
         if(debugWindow.isVisible()) updateDebugWindow();
+        
+    }
+    
+    public double getTotalSales(){
+        
+        double totalSales = 0;
+        
+        try{
+            for( Account a: accounts ){
+                
+                try{
+                    totalSales += a.computeSales();                   
+                }catch(Exception ex){
+                    System.out.println("Skipping account...");
+                }
+            }
+        }catch(Exception ex){
+            System.out.println("Aggregate update failed.");
+        }
+        
+        return totalSales;
+            
         
     }
 
